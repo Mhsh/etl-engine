@@ -1,0 +1,132 @@
+[
+	{
+		"sourcekey": "LabelingAndPackages.LabelingInformation",
+		"internalkey": "regulatory.labelingAndPackaging.labelingInfo",
+		"type": "String"
+	},
+	{
+		"sourcekey": "LabelingAndPackages.PackageDescriptions.InnerBottle",
+		"internalkey": "regulatory.labelingAndPackaging.packageDescriptions.Bottle",
+		"type": "String"
+	},
+	{
+		"sourcekey": "LabelingAndPackages.PackageDescriptions.OuterBox",
+		"internalkey": "regulatory.labelingAndPackaging.packageDescriptions.Box",
+		"type": "String"
+	},
+	{
+		"sourcekey": "ComplianceStatus",
+		"internalkey": "regulatory.metadata.complianceStatus",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DocumentID",
+		"internalkey": "regulatory.metadata.documentID",
+		"type": "String"
+	},
+	{
+		"sourcekey": "AttachmentsAndDocuments[*].AttachmentURL",
+		"internalkey": "regulatory.attachmentsAndSupportingDocuments[*].attachmentURL",
+		"type": "String"
+	},
+	{
+		"sourcekey": "AttachmentsAndDocuments[*].AttachmentType",
+		"internalkey": "regulatory.attachmentsAndSupportingDocuments[*].attachmentType",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DocumentStatus",
+		"internalkey": "regulatory.metadata.documentStatus",
+		"type": "String"
+	},
+	{
+		"sourcekey": "Correspondences[*].CorrespondenceDate",
+		"internalkey": "regulatory.regulatoryCorrespondence[*].correspondenceDate",
+		"type": "String"
+	},
+	{
+		"sourcekey": "Correspondences[*].CorrespondenceID",
+		"internalkey": "regulatory.regulatoryCorrespondence[*].correspondenceID",
+		"type": "String"
+	},
+	{
+		"sourcekey": "Correspondences[*].CorrespondenceType",
+		"internalkey": "regulatory.regulatoryCorrespondence[*].correspondenceType",
+		"type": "String"
+	},
+	{
+		"sourcekey": "ComplianceInfo.ComplianceStatus",
+		"internalkey": "regulatory.regulatoryCompliance.complianceStatus",
+		"type": "String"
+	},
+	{
+		"sourcekey": "ComplianceInfo.RequirementsStandards",
+		"internalkey": "regulatory.regulatoryCompliance.requirementsAndStandards",
+		"type": "String"
+	},
+	{
+		"sourcekey": "ApprovalsAndSignOffs[*].Approver",
+		"internalkey": "regulatory.approvalsAndSignOffs[*].approvalSignature",
+		"type": "String"
+	},
+	{
+		"sourcekey": "ApprovalsAndSignOffs[*].ApprovalDate",
+		"internalkey": "regulatory.approvalsAndSignOffs[*].approvalDate",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DocumentOwner",
+		"internalkey": "regulatory.metadata.documentOwner",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DomainInfo.RegulatoryAuthority",
+		"internalkey": "regulatory.specificDomainData.submissionInformation.regulatoryAuthority",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DomainInfo.SubmissionID",
+		"internalkey": "regulatory.specificDomainData.submissionInformation.submissionID",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DomainInfo.SubmissionType",
+		"internalkey": "regulatory.specificDomainData.submissionInformation.submissionType",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DomainInfo.SubmissionDate",
+		"internalkey": "regulatory.specificDomainData.submissionInformation.submissionDate",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DocumentVersion",
+		"internalkey": "regulatory.metadata.documentVersion",
+		"type": "String"
+	},
+	{
+		"sourcekey": "DocumentTitle",
+		"internalkey": "regulatory.metadata.documentTitle",
+		"type": "String"
+	},
+	{
+		"sourcekey": "ClassificationInfo.RegionMarket",
+		"internalkey": "regulatory.regulatoryClassification.regionOrMarket",
+		"type": "String"
+	},
+	{
+		"sourcekey": "ClassificationInfo.ProductType",
+		"internalkey": "regulatory.regulatoryClassification.productType",
+		"type": "String"
+	},
+	{
+		"sourcekey": "ClassificationInfo.RegulatoryClass",
+		"internalkey": "regulatory.regulatoryClassification.regulatoryClass",
+		"type": "String"
+	},
+	{
+		"sourcekey": "EffectiveDate",
+		"internalkey": "regulatory.metadata.effectiveDate",
+		"type": "String"
+	}
+]

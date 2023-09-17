@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: startTransformation
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ingestion
+    username: ingestion
+    password: ingestion
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+etl-engine:
+  output-file-path: /Users/my/tmp/output/

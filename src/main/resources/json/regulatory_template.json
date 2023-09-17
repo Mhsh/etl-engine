@@ -1,0 +1,103 @@
+{
+	"regulatory": {
+		"metadata": {
+			"documentID": "",
+			"documentTitle": "",
+			"documentVersion": "",
+			"documentStatus": "",
+			"documentOwner": "",
+			"effectiveDate": "",
+			"complianceStatus": "",
+			"domain": ""
+		},
+		"commonSections": {
+			"region": {},
+			"industry": {},
+			"agency": {}
+		},
+		"specificDomainData": {
+			"documentInformation": {
+				"documentID": "",
+				"documentTitle": "",
+				"documentVersion": "",
+				"documentStatus": "",
+				"documentOwner": ""
+			},
+			"submissionInformation": {
+				"submissionID": "",
+				"regulatoryAuthority": "",
+				"submissionType": "",
+				"submissionDate": ""
+			},
+			"regulatoryTracking": {
+				"eventDates": {
+					"filing": "",
+					"approval": "",
+					"renewal": ""
+				}
+			},
+			"milestones": ""
+		},
+		"regulatoryClassification": {
+			"productType": "",
+			"regulatoryClass": "",
+			"regionOrMarket": ""
+		},
+		"regulatoryCorrespondence": [
+			{
+				"correspondenceID": "",
+				"correspondenceDate": "",
+				"correspondenceType": ""
+			}
+		],
+		"labelingAndPackaging": {
+			"labelingInfo": "",
+			"packageComponents": [
+				"",
+				""
+			],
+			"packageDescriptions": {
+				"Box": "",
+				"Bottle": ""
+			}
+		},
+		"clinicalTrialInformation": [
+			{
+				"clinicalTrialID": "",
+				"trialPhase": "",
+				"investigationalProductInfo": ""
+			}
+		],
+		"changeControlAndVersions": [
+			{
+				"changeRequestID": "",
+				"changeDescription": "",
+				"effectiveDateOfChange": ""
+			}
+		],
+		"approvalsAndSignOffs": [
+					{
+						"approverName": "",
+						"approvalSignature": "",
+						"approvalDate": ""
+					}
+				
+		],
+		"regulatoryCompliance": {
+			"requirementsAndStandards": "",
+			"complianceStatus": ""
+		},
+		"attachmentsAndSupportingDocuments": [
+			{
+				"attachmentID": "",
+				"attachmentType": "",
+				"attachmentURL": ""
+			}
+		],
+		"body": "",
+		"keywordsAndMetadata": {
+			"keywords": "",
+			"metadataTags": ""
+		}
+	}
+}

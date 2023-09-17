@@ -1,0 +1,58 @@
+{
+    "DocumentID": "REGDOC001",
+    "DocumentTitle": "Healthcare Regulation",
+    "DocumentVersion": "1.0",
+    "DocumentStatus": "Approved",
+    "DocumentOwner": "Regulatory Department",
+    "EffectiveDate": "2023-08-01",
+    "ComplianceStatus": "TO BE DONE",
+    "DomainInfo": {
+        "SubmissionID": "SUB456",
+        "RegulatoryAuthority": "FDA",
+        "SubmissionType": "New Drug Application",
+        "SubmissionDate": "2023-07-15"
+    },
+    "ClassificationInfo": {
+        "ProductType": "Drug",
+        "RegulatoryClass": "Class II",
+        "RegionMarket": "US"
+    },
+    "Correspondences": [
+        {
+            "CorrespondenceID": "COR001",
+            "CorrespondenceDate": "2023-08-10",
+            "CorrespondenceType": "Inquiry"
+        }
+    ],
+    "LabelingAndPackages": {
+        "LabelingInformation": "Package Inserts and Labels provided",
+        "PackageDescriptions": {
+            "OuterBox": "Outer packaging",
+            "InnerBottle": "Inner container"
+        }
+    },
+    "ApprovalsAndSignOffs": [
+        {
+            "Approver": "Sarah Johnson",
+            "ApprovalDate": "2023-07-30"
+        },
+        {
+            "Approver": "Sarah Johnson1",
+            "ApprovalDate": "2023-07-31"
+        }
+    ],
+    "ComplianceInfo": {
+        "RequirementsStandards": [
+            "HIPAA",
+            "FDA",
+            "QSR"
+        ],
+        "ComplianceStatus": "READY"
+    },
+    "AttachmentsAndDocuments": [
+        {
+            "AttachmentType": "Certificate of Compliance",
+            "AttachmentURL": "attachment_url"
+        }
+    ]
+}
