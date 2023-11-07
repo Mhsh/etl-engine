@@ -1,5 +1,9 @@
 package com.etl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
  * The ETLMessage class represents a message used in an Extract, Transform, Load
  * (ETL) process. It contains information about a subscription ID and the raw
@@ -10,7 +14,7 @@ public class ETLMessage {
 	/**
 	 * The subscription ID associated with the ETL message.
 	 */
-	private Long subscriptionId;
+	private UUID subscriptionId;
 
 	/**
 	 * The file path of the transformed data file.
@@ -27,12 +31,14 @@ public class ETLMessage {
 	 */
 	private String fileType;
 
+	private Map<String, String> internalData = new HashMap<>();
+
 	/**
 	 * Gets the subscription ID associated with the ETL message.
 	 *
 	 * @return The subscription ID.
 	 */
-	public Long getSubscriptionId() {
+	public UUID getSubscriptionId() {
 		return subscriptionId;
 	}
 
@@ -41,7 +47,7 @@ public class ETLMessage {
 	 *
 	 * @param subscriptionId The subscription ID to set.
 	 */
-	public void setSubscriptionId(Long subscriptionId) {
+	public void setSubscriptionId(UUID subscriptionId) {
 		this.subscriptionId = subscriptionId;
 	}
 
@@ -93,6 +99,20 @@ public class ETLMessage {
 	 */
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
+	}
+
+	/**
+	 * @return the internalData
+	 */
+	public Map<String, String> getInternalData() {
+		return internalData;
+	}
+
+	/**
+	 * @param internalData the internalData to set
+	 */
+	public void setInternalData(Map<String, String> internalData) {
+		this.internalData = internalData;
 	}
 
 }

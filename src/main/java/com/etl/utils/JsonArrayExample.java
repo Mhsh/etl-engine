@@ -2,6 +2,7 @@ package com.etl.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public class JsonArrayExample {
 	public static void main(String[] args) {
@@ -30,13 +31,12 @@ public class JsonArrayExample {
 					return;
 				}
 			}
-
+			System.out.println(currentNode.at(""));
 			// Check if the final node is an array
 			if (currentNode.isArray()) {
-				// Iterate over the elements of the array
-				for (JsonNode element : currentNode) {
-					System.out.println(element);
-				}
+				currentNode = (ArrayNode) currentNode;
+				for (int i = 0; i < currentNode.size(); i++)
+					System.out.println(currentNode.get(i));
 			} else {
 				System.out.println("Path does not point to an array: " + path);
 			}

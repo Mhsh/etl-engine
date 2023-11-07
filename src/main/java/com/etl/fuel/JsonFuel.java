@@ -1,6 +1,8 @@
 package com.etl.fuel;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
@@ -12,16 +14,12 @@ import org.springframework.stereotype.Component;
 import com.etl.ETLMessage;
 import com.etl.MappingInfo;
 import com.etl.utils.FileUtils;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.storage.jpa.Enums.FileType;
-import com.storage.jpa.JpaClientTemplate;
 
 @Component
 public class JsonFuel implements Fuel {
@@ -35,56 +33,17 @@ public class JsonFuel implements Fuel {
 	private static final Logger LOGGER = Logger.getLogger(JsonFuel.class.getName());
 
 	@Override
-	public void transform(List<MappingInfo> mappingInfos, ETLMessage etlMessage, JpaClientTemplate template)
+	public void transform(List<MappingInfo> mappingInfos, ETLMessage etlMessage, JsonNode templateJsonFileNode)
 			throws Exception {
-		LOGGER.info("Transforming JSON data...");
-		JsonNode templateJsonFileNode = objectMapper.readTree(template.getTemplate());
+		LOGGER.info(
+				"Transforming JSON data... Parameters: mappingInfos=" + mappingInfos + ", etlMessage=" + etlMessage);
 		JsonNode rawFileJsonFileNode = objectMapper.readTree(FileUtils.readFile(etlMessage.getRawFilePath()));
-		// Parse the JSON
-		String arrayPath = null;
-		MappingInfo searchMappingInfo = new MappingInfo("ROOT");
-		if (mappingInfos.contains(searchMappingInfo)) {
-			arrayPath = mappingInfos.get(mappingInfos.indexOf(searchMappingInfo)).getRawFilePathKey();
+		LOGGER.info("No arrayPath specified, proceeding with default mapping.");
+
+		if (LOGGER.isLoggable(java.util.logging.Level.FINE)) {
+			LOGGER.fine("Igniting mapping... Parameters: mappingInfos=" + mappingInfos + ", templateJsonFileNode="
+					+ templateJsonFileNode + ", rawFileJsonFileNode=" + rawFileJsonFileNode);
 		}
-		if (arrayPath != null) {
-			LOGGER.info("Using arrayPath: " + arrayPath);
-
-			// Traverse the JSON structure using the path
-			JsonNode currentNode = rawFileJsonFileNode;
-			// Split the path by "/"
-			String[] pathSegments = arrayPath.split("/");
-
-			for (String segment : pathSegments) {
-				currentNode = currentNode.get(segment);
-				// validating every path given is present or not.
-				if (currentNode == null) {
-					LOGGER.warning("Wrong array path provided in ROOT. Path " + arrayPath);
-					throw new RuntimeException("Wrong array path provided in ROOT. Path " + arrayPath);
-				}
-			}
-			// Check if the final node is an array
-			if (currentNode.isArray()) {
-				// Iterate over the elements of the array
-				for (JsonNode element : currentNode) {
-					igniteMapping(mappingInfos, templateJsonFileNode, element);
-				}
-			} else {
-				LOGGER.warning(
-						"ROOT mapping is provided but the target object in path is not an array. Path " + arrayPath);
-				throw new RuntimeException(
-						"ROOT mapping is provided but the target object in path is not an array. Path " + arrayPath);
-			}
-		} else {
-			LOGGER.info("No arrayPath specified, proceeding with default mapping.");
-			igniteMapping(mappingInfos, templateJsonFileNode, rawFileJsonFileNode);
-		}
-		LOGGER.info("Transformation complete.");
-	}
-
-	private void igniteMapping(List<MappingInfo> mappingInfos, JsonNode templateJsonFileNode,
-			JsonNode rawFileJsonFileNode)
-			throws JsonGenerationException, JsonMappingException, JsonProcessingException, IOException {
-		LOGGER.info("Igniting mapping...");
 
 		mappingInfos.stream().forEach(mappingInfo -> {
 			// checking whether it is array nested mapping or direct mapping.
@@ -96,12 +55,18 @@ public class JsonFuel implements Fuel {
 			// {
 			// "DocumentID": "REGDOC001"
 			// }
+
+			// TODO - we have change the mapping structure.
+			// Now the template file path is having the major role.
+			// The below code is written based on assumption of raw file being stored as
+			// main.
+			// check whether it still works or need to reverse logic a bit.
 			if (mappingInfo.getMappingForPaths().isEmpty()) {
 				handleDirectObjectJsonCreation(mappingInfo, rawFileJsonFileNode, templateJsonFileNode);
 			} else {
 				JsonNode rawFileJsonFilePathNode = rawFileJsonFileNode.at(mappingInfo.getRawFilePathKey());
 				JsonNode templateJsonObjectNode = templateJsonFileNode.at(mappingInfo.getTemplateFilePathKey());
-				if (rawFileJsonFileNode instanceof MissingNode) {
+				if (rawFileJsonFileNode instanceof MissingNode || rawFileJsonFilePathNode instanceof MissingNode) {
 					throw new RuntimeException("No mapping found for input raw file for path " + rawFileJsonFileNode);
 				}
 				if (rawFileJsonFilePathNode instanceof ArrayNode) {
@@ -112,20 +77,36 @@ public class JsonFuel implements Fuel {
 				}
 			}
 		});
-		saveTransformedFile(templateJsonFileNode, outputFilePath);
+
+		saveFile(templateJsonFileNode, etlMessage.getRawFilePath());
 		LOGGER.info("Mapping completed.");
+
+		LOGGER.info("Transformation complete.");
 	}
 
-	private void saveTransformedFile(JsonNode templateJsonFileNode, String rawFilePath)
-			throws JsonGenerationException, JsonMappingException, JsonProcessingException, IOException {
-		File outputFile = new File(outputFilePath + FileUtils.getFileName(rawFilePath));
-		objectMapper.writeValue(outputFile,
-				objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(templateJsonFileNode));
+	public void saveFile(JsonNode templateJsonFileNode, String filePath) {
+		LOGGER.info(String.format("Saving file at file location  - : %s ", outputFilePath));
+		File file = new File(outputFilePath + "/" + FileUtils.getFileName(filePath));
+		if (!file.getParentFile().exists())
+			file.getParentFile().mkdirs();
+		try (FileWriter fileWriter = new FileWriter(filePath);
+				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+			// Write the content to the file
+			bufferedWriter
+					.write(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(templateJsonFileNode));
+		} catch (IOException e) {
+			throw new RuntimeException("Failed to save file. Reason - " + e.getLocalizedMessage());
+		}
 	}
 
 	private void handleDirectObjectJsonCreation(MappingInfo mappingInfo, JsonNode rawFileJsonFileNode,
 			JsonNode templateJsonFileNode) {
-		LOGGER.info("Handling direct object JSON creation...");
+		if (LOGGER.isLoggable(java.util.logging.Level.FINE)) {
+			LOGGER.fine("Handling direct object JSON creation... Parameters: mappingInfo=" + mappingInfo
+					+ ", rawFileJsonFileNode=" + rawFileJsonFileNode + ", templateJsonFileNode="
+					+ templateJsonFileNode);
+		}
+
 		// Get the raw file node path where we have to replace the path.
 		JsonNode rawFileObjectNode = rawFileJsonFileNode.get(mappingInfo.getRawFilePathKey());
 		// We are constructing the template paths for replacing the values.
@@ -147,7 +128,12 @@ public class JsonFuel implements Fuel {
 
 	private void handleNestedObjectJsonCreation(MappingInfo mappingInfo, JsonNode rawFileJsonFilePathNode,
 			JsonNode templateJsonObjectNode) {
-		LOGGER.info("Handling nested object JSON creation...");
+		if (LOGGER.isLoggable(java.util.logging.Level.FINE)) {
+			LOGGER.fine("Handling nested object JSON creation... Parameters: mappingInfo=" + mappingInfo
+					+ ", rawFileJsonFilePathNode=" + rawFileJsonFilePathNode + ", templateJsonObjectNode="
+					+ templateJsonObjectNode);
+		}
+
 		// This is nested object
 		// "LabelingAndPackages": {
 		// "LabelingInformation": "Package Inserts and Labels provided",
@@ -174,13 +160,19 @@ public class JsonFuel implements Fuel {
 				((ObjectNode) templateJsonObjectNode).put(mappingInfo.getMappingForPaths().get(key),
 						rawFileJsonFilePathNode.get(key).asText());
 		});
-
-		LOGGER.info("Nested object JSON creation completed.");
+		if (LOGGER.isLoggable(java.util.logging.Level.FINE)) {
+			LOGGER.fine("Nested object JSON creation completed.");
+		}
 	}
 
 	private void handleNestedArrayObjects(MappingInfo mappingInfo, ArrayNode rawFileJsonFilePathNode,
 			ArrayNode templateJsonObjectNode) {
-		LOGGER.info("Handling nested array JSON creation...");
+		if (LOGGER.isLoggable(java.util.logging.Level.FINE)) {
+			LOGGER.fine("Handling nested array JSON creation... Parameters: mappingInfo=" + mappingInfo
+					+ ", rawFileJsonFilePathNode=" + rawFileJsonFilePathNode + ", templateJsonObjectNode="
+					+ templateJsonObjectNode);
+		}
+
 		// This is a nested array case where the target replacement is an array.
 		// So we already know from where (mappingInfo.getRawFilePathKey()) we have to
 		// take the value.

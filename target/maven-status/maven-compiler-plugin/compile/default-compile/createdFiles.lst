@@ -1,0 +1,12 @@
+com/etl/EtlEngineStarter.class
+com/etl/MappingExtractor.class
+com/etl/ETLEngineGearBox.class
+com/etl/utils/JsonArrayExample.class
+com/etl/ETLMessage.class
+com/etl/fuel/JsonFuel.class
+com/etl/MappingInfo.class
+com/etl/fuel/FuelPump.class
+com/etl/TemplateReplacer.class
+com/etl/ETLEngine.class
+com/etl/utils/FileUtils.class
+com/etl/fuel/Fuel.class

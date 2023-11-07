@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.etl.ETLMessage;
 import com.etl.MappingInfo;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.storage.jpa.Enums.FileType;
 import com.storage.jpa.JpaClientTemplate;
 
@@ -40,7 +41,8 @@ public interface Fuel {
 	 *                     and loading the transformed data.
 	 * @throws Exception If an error occurs during the transformation process.
 	 */
-	void transform(List<MappingInfo> mappingInfos, ETLMessage etlMessage, JpaClientTemplate template) throws Exception;
+	void transform(List<MappingInfo> mappingInfos, ETLMessage etlMessage, JsonNode templateJsonFileNode)
+			throws Exception;
 
 	/**
 	 * Retrieves the name of the fuel type associated with this object.

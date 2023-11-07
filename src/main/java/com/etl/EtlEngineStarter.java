@@ -13,7 +13,7 @@ public class EtlEngineStarter {
 	private ETLEngineGearBox engineGearBox;
 
 	@Bean
-	Consumer<ETLMessage> httpWorker() {
+	Consumer<ETLMessage> startTransformation() {
 		return engineGearBox::startTransformation;
 	}
 }

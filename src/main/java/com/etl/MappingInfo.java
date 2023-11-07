@@ -46,8 +46,8 @@ public class MappingInfo {
 	 * 
 	 * @param rawFilePathKey The key that identifies the raw file path.
 	 */
-	public MappingInfo(String rawFilePathKey) {
-		this.rawFilePathKey = rawFilePathKey;
+	public MappingInfo(String templateFilePathKey) {
+		this.templateFilePathKey = templateFilePathKey;
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class MappingInfo {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(rawFilePathKey);
+		return Objects.hash(templateFilePathKey);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class MappingInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		MappingInfo other = (MappingInfo) obj;
-		return Objects.equals(rawFilePathKey, other.rawFilePathKey);
+		return Objects.equals(templateFilePathKey, other.templateFilePathKey);
 	}
 
 	/**

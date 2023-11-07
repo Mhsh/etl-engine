@@ -1,0 +1,16 @@
+{
+    "subscriptionId": "58c29733-0ba2-4465-8e69-3924aa7d46d2",
+    "rawFilePath": "/Users/my/tmp/ingestion//Factiva/58c29733-0ba2-4465-8e69-3924aa7d46d2/2023-11-07/NIFBSALQOC_483e809c-793b-4bee-b70e-8a012f52024b.xml",
+    "clientId": "Factiva",
+    "fileType": null,
+    "internalData": {
+        "internalSubscriptionId": "58c29733-0ba2-4465-8e69-3924aa7d46d2",
+        "internalConnector": "RSS",
+        "internalSubsriptionName": "NIFBSALQOC",
+        "internalSubscriptionDetailId": "e0edd396-c997-4c91-ab3c-cab0b37e8c0e",
+        "internalUrl": "http://journals.lww.com/co-gastroenterology/_layouts/OAKS.Journals/feed.aspx?FeedType=PublishAheadofPrint&year=9000&issue=00000",
+        "internalClientId": "Factiva",
+        "internalFilePath": null,
+        "internalDigest": null
+    }
+}
