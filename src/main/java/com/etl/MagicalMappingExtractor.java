@@ -39,7 +39,7 @@ public class MagicalMappingExtractor extends Extractor {
 	 * @throws EntityNotFoundException If the subscription with the specified ID is
 	 *                                 not found.
 	 */
-	public List<MappingInfo> createMagicalMappings(ETLMessage message) throws EntityNotFoundException {
+	public List<MappingInfo> createMagicalMappings(ETLMessage message) {
 		List<MappingInfo> mappingInfos = new ArrayList<>();
 		JpaSubscription subscription = subscriptionRepository.findById(message.getSubscriptionId())
 				.orElseThrow(EntityNotFoundException::new);
@@ -79,7 +79,6 @@ public class MagicalMappingExtractor extends Extractor {
 				mappingInfos.add(mappingInfo);
 			}
 		}
-
 		return mappingInfos;
 	}
 }

@@ -115,8 +115,9 @@ public class RSSStruct {
 		moduleMapping.put("/document/creator", DCModuleImpl::getCreator);
 		moduleMapping.put("/document/source", DCModuleImpl::getSource);
 		moduleMapping.put("/document/publisher", DCModuleImpl::getPublisher);
-		moduleMapping.put("/document/publicationDate", entry -> entry.getDate().toInstant().atOffset(ZoneOffset.UTC)
-				.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+		moduleMapping.put("/document/publicationDate", entry -> entry.getDate() != null
+				? entry.getDate().toInstant().atOffset(ZoneOffset.UTC).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+				: null);
 		moduleMapping.put("/file/source", DCModuleImpl::getPublisher);
 		moduleMapping.put("/document/language", DCModuleImpl::getLanguage);
 		moduleMapping.put("/file/rights", DCModuleImpl::getRights);

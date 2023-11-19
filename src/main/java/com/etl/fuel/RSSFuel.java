@@ -57,8 +57,7 @@ public class RSSFuel implements Fuel {
 				JsonNode templateJsonObjectNode = templateJsonFileNode.at(mappingInfo.getTemplateFilePathKey());
 				if (templateJsonObjectNode instanceof MissingNode) {
 					throw new RuntimeException("Path not found in json for " + mappingInfo.getTemplateFilePathKey());
-				}
-				if (templateJsonObjectNode instanceof ArrayNode) {
+				} else if (templateJsonObjectNode instanceof ArrayNode) {
 					handleNestedArrayObjects(mappingInfo, feed, (ArrayNode) templateJsonObjectNode);
 				} else {
 					handleNestedObjectJsonCreation(mappingInfo, feed, templateJsonObjectNode);

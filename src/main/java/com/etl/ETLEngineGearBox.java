@@ -66,7 +66,6 @@ public class ETLEngineGearBox {
 		} catch (Exception e) {
 			throw new RuntimeException("Failed for transformation. Reason - " + e.getLocalizedMessage());
 		}
-
 	}
 
 	private void populateInternalData(JsonNode templateJsonFileNode, Map<String, String> internalMap) {
