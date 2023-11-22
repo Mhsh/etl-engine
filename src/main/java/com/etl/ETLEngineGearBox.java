@@ -13,7 +13,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.storage.jpa.JpaClientTemplate;
+import com.storage.jpa.JpaETLFile;
+import com.storage.jpa.JpaEtlErrorDetail;
 import com.storage.repository.JpaClientTemplateRepository;
+import com.storage.repository.JpaETLErrorDetailRepository;
+import com.storage.repository.JpaETLFileRepository;
+import com.storage.repository.JpaSubscriptionDetailRepository;
 
 @Component
 public class ETLEngineGearBox {
@@ -23,6 +28,15 @@ public class ETLEngineGearBox {
 
 	@Autowired
 	private JpaClientTemplateRepository clientTemplateRepository;
+
+	@Autowired
+	private JpaETLFileRepository etlFileRepository;
+
+	@Autowired
+	private JpaSubscriptionDetailRepository subscriptionDetailRepository;
+
+	@Autowired
+	private JpaETLErrorDetailRepository etlErrorDetailRepository;
 
 	@Autowired
 	private FuelPump fuelPump;
@@ -63,7 +77,9 @@ public class ETLEngineGearBox {
 						+ ". No code present to handle this file type. Please contact administrator.");
 			}
 			fuel.transform(mappingInfos, etlMessage, templateJsonFileNode);
+			etlFileRepository.save(convertToETLFile(etlMessage));
 		} catch (Exception e) {
+			etlErrorDetailRepository.save(convertToErrorDetail(etlMessage, e));
 			throw new RuntimeException("Failed for transformation. Reason - " + e.getLocalizedMessage());
 		}
 	}
@@ -76,5 +92,29 @@ public class ETLEngineGearBox {
 	}
 
 	Function<String, Fuel> getFuel = (fuelType) -> fuelPump.getHandler(fuelType);
+
+	private JpaETLFile convertToETLFile(ETLMessage etlMessage) {
+		JpaETLFile etlFile = new JpaETLFile();
+		etlFile.setClientId(etlMessage.getClientId());
+		etlFile.setId(etlMessage.getSubscriptionId());
+		etlFile.setRawFilePath(etlMessage.getRawFilePath());
+		etlFile.setSubscriptionDetail(
+				subscriptionDetailRepository.findById(etlMessage.getSubscriptionDetailId()).orElse(null));
+		etlFile.setFileType(etlMessage.getFileType());
+		etlFile.setConnectorType(etlMessage.getConnectorType());
+		return etlFile;
+	}
+
+	private JpaEtlErrorDetail convertToErrorDetail(ETLMessage etlMessage, Exception e) {
+		JpaEtlErrorDetail errorDetail = new JpaEtlErrorDetail();
+		String newErrorDetail = "Message - " + e.getLocalizedMessage() + ". Cause - " + e.getCause();
+		String newErrorCode = e.getClass().getSimpleName();
+		errorDetail.setConnectorType(null);
+		errorDetail.setErrorDetail(newErrorDetail);
+		errorDetail.setFileType(null);
+		errorDetail.setSubscriptionDetail(null);
+		errorDetail.setErrorType(newErrorCode);
+		return errorDetail;
+	}
 
 }

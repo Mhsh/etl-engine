@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.storage.jpa.Enums.ConnectorType;
+
 /**
  * The ETLMessage class represents a message used in an Extract, Transform, Load
  * (ETL) process. It contains information about a subscription ID and the raw
@@ -32,6 +34,10 @@ public class ETLMessage {
 	private String fileType;
 
 	private Map<String, String> internalData = new HashMap<>();
+
+	private UUID subscriptionDetailId;
+
+	private ConnectorType connectorType;
 
 	/**
 	 * Gets the subscription ID associated with the ETL message.
@@ -113,6 +119,34 @@ public class ETLMessage {
 	 */
 	public void setInternalData(Map<String, String> internalData) {
 		this.internalData = internalData;
+	}
+
+	/**
+	 * @return the subscriptionDetailId
+	 */
+	public UUID getSubscriptionDetailId() {
+		return subscriptionDetailId;
+	}
+
+	/**
+	 * @param subscriptionDetailId the subscriptionDetailId to set
+	 */
+	public void setSubscriptionDetailId(UUID subscriptionDetailId) {
+		this.subscriptionDetailId = subscriptionDetailId;
+	}
+
+	/**
+	 * @return the connectorType
+	 */
+	public ConnectorType getConnectorType() {
+		return connectorType;
+	}
+
+	/**
+	 * @param connectorType the connectorType to set
+	 */
+	public void setConnectorType(ConnectorType connectorType) {
+		this.connectorType = connectorType;
 	}
 
 }

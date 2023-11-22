@@ -1,0 +1,47 @@
+2023-11-22 18:27:57.566 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2023-11-22 18:27:57.574 [main] INFO  com.etl.ETLEngine - Starting ETLEngine v0.0.1-SNAPSHOT using Java 17.0.8 on Maheshs-MacBook-Pro.local with PID 8513 (/Users/my/work/etl-engine/target/assembly/etl-engine-executable/etl-engine-0.0.1-SNAPSHOT.jar started by my in /Users/my/work/etl-engine/target/assembly/etl-engine-executable)
+2023-11-22 18:27:57.574 [main] INFO  com.etl.ETLEngine - No active profile set, falling back to default profiles: default
+2023-11-22 18:27:57.831 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-11-22 18:27:57.944 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 109 ms. Found 13 JPA repository interfaces.
+2023-11-22 18:27:58.106 [main] INFO  o.s.c.a.ConfigurationClassEnhancer - @Bean method FunctionConfiguration.po is non-static and returns an object assignable to Spring's BeanFactoryPostProcessor interface. This will result in a failure to process annotations such as @Autowired, @Resource and @PostConstruct within the method's declaring @Configuration class. Add the 'static' modifier to this method to avoid these container lifecycle issues; see @Bean javadoc for complete details.
+2023-11-22 18:27:58.112 [main] INFO  o.s.i.c.DefaultConfiguringBeanFactoryPostProcessor - No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2023-11-22 18:27:58.114 [main] INFO  o.s.i.c.DefaultConfiguringBeanFactoryPostProcessor - No bean named 'taskScheduler' has been explicitly defined. Therefore, a default ThreadPoolTaskScheduler will be created.
+2023-11-22 18:27:58.117 [main] INFO  o.s.i.c.DefaultConfiguringBeanFactoryPostProcessor - No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2023-11-22 18:27:58.177 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.integration.config.IntegrationManagementConfiguration' of type [org.springframework.integration.config.IntegrationManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-11-22 18:27:58.181 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'integrationChannelResolver' of type [org.springframework.integration.support.channel.BeanFactoryChannelResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-11-22 18:27:58.182 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'integrationDisposableAutoCreatedBeans' of type [org.springframework.integration.config.annotation.Disposables] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-11-22 18:27:58.267 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-11-22 18:27:58.303 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.29.Final
+2023-11-22 18:27:58.372 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-11-22 18:27:58.441 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-11-22 18:27:58.580 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-11-22 18:27:58.606 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-11-22 18:27:59.187 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-11-22 18:27:59.194 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-11-22 18:27:59.847 [main] INFO  o.s.s.c.ThreadPoolTaskScheduler - Initializing ExecutorService 'taskScheduler'
+2023-11-22 18:27:59.867 [main] INFO  o.s.c.s.m.DirectWithAttributesChannel - Channel 'application.tranformer' has 1 subscriber(s).
+2023-11-22 18:27:59.903 [main] INFO  o.s.i.endpoint.EventDrivenConsumer - Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2023-11-22 18:27:59.903 [main] INFO  o.s.i.c.PublishSubscribeChannel - Channel 'application.errorChannel' has 1 subscriber(s).
+2023-11-22 18:27:59.903 [main] INFO  o.s.i.endpoint.EventDrivenConsumer - started bean '_org.springframework.integration.errorLogger'
+2023-11-22 18:27:59.903 [main] INFO  o.s.c.s.binder.DefaultBinderFactory - Creating binder: rabbit
+2023-11-22 18:27:59.955 [main] INFO  o.s.c.s.binder.DefaultBinderFactory - Caching the binder: rabbit
+2023-11-22 18:27:59.955 [main] INFO  o.s.c.s.binder.DefaultBinderFactory - Retrieving cached binder: rabbit
+2023-11-22 18:27:59.981 [main] INFO  o.s.c.s.b.r.p.RabbitExchangeQueueProvisioner - declaring queue for inbound: tranformer.transformer-group, bound to: tranformer
+2023-11-22 18:27:59.983 [main] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672]
+2023-11-22 18:28:00.023 [main] INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#5568c66f:0/SimpleConnection@570ba13 [delegate=amqp://guest@127.0.0.1:5672/, localPort= 51478]
+2023-11-22 18:28:00.074 [main] INFO  o.s.c.s.binder.BinderErrorChannel - Channel 'tranformer.transformer-group.errors' has 1 subscriber(s).
+2023-11-22 18:28:00.074 [main] INFO  o.s.c.s.binder.BinderErrorChannel - Channel 'tranformer.transformer-group.errors' has 2 subscriber(s).
+2023-11-22 18:28:00.091 [main] INFO  o.s.i.a.i.AmqpInboundChannelAdapter - started bean 'inbound.tranformer.transformer-group'
+2023-11-22 18:28:00.106 [main] INFO  com.etl.ETLEngine - Started ETLEngine in 2.82 seconds (JVM running for 3.103)
+2023-11-22 18:28:19.605 [SpringContextShutdownHook] INFO  o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish.
+2023-11-22 18:28:20.171 [SpringContextShutdownHook] INFO  o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish.
+2023-11-22 18:28:20.171 [SpringContextShutdownHook] INFO  o.s.i.a.i.AmqpInboundChannelAdapter - stopped bean 'inbound.tranformer.transformer-group'
+2023-11-22 18:28:20.175 [SpringContextShutdownHook] INFO  o.s.c.s.binder.BinderErrorChannel - Channel 'application.tranformer.transformer-group.errors' has 1 subscriber(s).
+2023-11-22 18:28:20.176 [SpringContextShutdownHook] INFO  o.s.c.s.binder.BinderErrorChannel - Channel 'application.tranformer.transformer-group.errors' has 0 subscriber(s).
+2023-11-22 18:28:20.178 [SpringContextShutdownHook] INFO  o.s.i.endpoint.EventDrivenConsumer - Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2023-11-22 18:28:20.178 [SpringContextShutdownHook] INFO  o.s.i.c.PublishSubscribeChannel - Channel 'application.errorChannel' has 0 subscriber(s).
+2023-11-22 18:28:20.178 [SpringContextShutdownHook] INFO  o.s.i.endpoint.EventDrivenConsumer - stopped bean '_org.springframework.integration.errorLogger'
+2023-11-22 18:28:20.179 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskScheduler - Shutting down ExecutorService 'taskScheduler'
+2023-11-22 18:28:20.185 [SpringContextShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-11-22 18:28:20.186 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-11-22 18:28:20.187 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
