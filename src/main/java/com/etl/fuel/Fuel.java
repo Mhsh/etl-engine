@@ -1,10 +1,9 @@
 package com.etl.fuel;
 
-import java.util.List;
-
-import com.etl.ETLMessage;
 import com.etl.MappingInfo;
+import com.etl.jms.ETLMessage;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.storage.jpa.Enums.FileType;
 import com.storage.jpa.JpaClientTemplate;
 
@@ -30,19 +29,11 @@ import com.storage.jpa.JpaClientTemplate;
  */
 public interface Fuel {
 
-	/**
-	 * Transforms data based on the specified mapping rules and configurations.
-	 *
-	 * @param mappingInfos A list of {@code MappingInfo} objects containing the
-	 *                     mapping rules for transforming the data.
-	 * @param etlMessage   An {@code ETLMessage} containing information about the
-	 *                     data to be transformed.
-	 * @param template     A {@code JpaClientTemplate} instance used for processing
-	 *                     and loading the transformed data.
-	 * @throws Exception If an error occurs during the transformation process.
-	 */
-	void transform(List<MappingInfo> mappingInfos, ETLMessage etlMessage, JsonNode templateJsonFileNode)
-			throws Exception;
+	void handleDirectObjectJsonCreation(MappingInfo mappingInfo, Delegate delegate, JsonNode templateJsonFileNode);
+
+	void handleNestedArrayObjects(MappingInfo mappingInfo, Delegate delegate, ArrayNode templateJsonObjectNode);
+
+	void handleNestedObjectJsonCreation(MappingInfo mappingInfo, Delegate delegate, JsonNode templateJsonObjectNode);
 
 	/**
 	 * Retrieves the name of the fuel type associated with this object.
@@ -50,4 +41,7 @@ public interface Fuel {
 	 * @return A {@code String} representing the name of the fuel type.
 	 */
 	FileType getFuelName();
+
+	Delegate getDelegate();
+
 }

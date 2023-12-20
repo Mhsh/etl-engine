@@ -1,10 +1,11 @@
-package com.etl;
+package com.etl.jms;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import com.storage.jpa.Enums.ConnectorType;
+import com.storage.jpa.Enums.FileType;
 
 /**
  * The ETLMessage class represents a message used in an Extract, Transform, Load
@@ -31,13 +32,15 @@ public class ETLMessage {
 	/**
 	 * The file type to be handled.
 	 */
-	private String fileType;
+	private FileType fileType;
 
 	private Map<String, String> internalData = new HashMap<>();
 
 	private UUID subscriptionDetailId;
 
 	private ConnectorType connectorType;
+
+	private UUID identifier;
 
 	/**
 	 * Gets the subscription ID associated with the ETL message.
@@ -96,14 +99,14 @@ public class ETLMessage {
 	/**
 	 * @return the fileType
 	 */
-	public String getFileType() {
+	public FileType getFileType() {
 		return fileType;
 	}
 
 	/**
 	 * @param fileType the fileType to set
 	 */
-	public void setFileType(String fileType) {
+	public void setFileType(FileType fileType) {
 		this.fileType = fileType;
 	}
 
@@ -147,6 +150,27 @@ public class ETLMessage {
 	 */
 	public void setConnectorType(ConnectorType connectorType) {
 		this.connectorType = connectorType;
+	}
+
+	/**
+	 * @return the identifier
+	 */
+	public UUID getIdentifier() {
+		return identifier;
+	}
+
+	/**
+	 * @param identifier the identifier to set
+	 */
+	public void setIdentifier(UUID identifier) {
+		this.identifier = identifier;
+	}
+
+	@Override
+	public String toString() {
+		return "ETLMessage [subscriptionId=" + subscriptionId + ", rawFilePath=" + rawFilePath + ", clientId="
+				+ clientId + ", fileType=" + fileType + ", internalData=" + internalData + ", subscriptionDetailId="
+				+ subscriptionDetailId + ", connectorType=" + connectorType + ", identifier=" + identifier + "]";
 	}
 
 }

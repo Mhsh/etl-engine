@@ -10,6 +10,7 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import com.etl.jms.ETLMessage;
 import com.storage.jpa.JpaEtlSubscriptionMapping;
 import com.storage.jpa.JpaSubscription;
 import com.storage.repository.JpaMappingRepository;
